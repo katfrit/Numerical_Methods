@@ -1,0 +1,18 @@
+def Golden(a, b, f, N, Tol, rho):
+    for k in range(N):
+        e = b - a  # Update the width of the interval
+        c = b - rho * e
+        d = a + rho * e
+        if f(c) < f(d):
+            b = d
+        else:
+            a = c
+        if 0.5 * e < Tol:
+            return 0.5 * (a + b)  # Return early if tolerance is met
+    return 0.5 * (a + b)  # Return midpoint if max iterations reached
+# Example usage:
+def f(x):
+    return -x
+
+result = Golden(0, 10, f, 100, 1e-6, 0.618)
+print(result)
